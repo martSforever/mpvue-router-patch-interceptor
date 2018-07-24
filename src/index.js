@@ -4,6 +4,7 @@
 */
 
 import MpvueRouterPatch from 'mpvue-router-patch'
+import {pushArray} from "./utils";
 
 let $router;                                  //mpvue-router-patch插件注册的$router对象
 let $push;                                    //mpvue-router-patch插件注册的$router.push方法
@@ -47,7 +48,7 @@ function getMatchMiddlewares(path) {
     for (let regexp in matchMiddlewares) {
         // console.log(regexp, path, new RegExp(regexp).test(path))
         if (new RegExp(regexp).test(path))
-            ret.pushArray(matchMiddlewares[regexp])
+            pushArray(ret, matchMiddlewares[regexp])
     }
     return ret;
 }
@@ -58,7 +59,7 @@ let MpvueRouterPatchInterceptor = {
         console.log('Vue.prototype.$router', Vue.prototype.$router)
         $router = Vue.prototype.$router
         $push = $router.push
-        everyMiddlewares.pushArray(every)
+        pushArray(everyMiddlewares, every)
         matchMiddlewares = Object.assign({}, match)
 
         /*重写mpvue-router-patch的$router.push方法*/
@@ -76,6 +77,9 @@ let MpvueRouterPatchInterceptor = {
     match(regexp, middleware) {
         (!matchMiddlewares[regexp]) && (matchMiddlewares[regexp] = [])
         matchMiddlewares[regexp].push(middleware)
+    },
+    sayHello() {
+        console.log('hello')
     },
 }
 

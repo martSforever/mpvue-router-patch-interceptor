@@ -1,6 +1,6 @@
 {
   "name": "mpvue-router-patch-interceptor",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "基于mpvue-router-patch插件，实现的路由跳转拦截器插件，使用该插件，可以无需引入mpvue-router-patch",
   "main": "dist/bundle.js",
   "scripts": {
@@ -25,5 +25,6 @@
     "mpvue-router-patch": "^0.2.1"
   },
   "devDependencies": {
+    "rollup-plugin-node-resolve": "^3.3.0"
   }
 }
